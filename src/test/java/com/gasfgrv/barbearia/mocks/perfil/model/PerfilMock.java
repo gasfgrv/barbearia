@@ -31,7 +31,14 @@ public class PerfilMock {
         return barbeiro;
     }
 
-    public static PerfilEntity getEntity() {
+    public static PerfilEntity getClienteEntity() {
+        var entity = new PerfilEntity();
+        entity.setId(perfilEnum.CLIENTE.id);
+        entity.setNome(perfilEnum.CLIENTE.permissao);
+        return entity;
+    }
+
+    public static PerfilEntity getBarbeiroEntity() {
         var entity = new PerfilEntity();
         entity.setId(perfilEnum.BARBEIRO.id);
         entity.setNome(perfilEnum.BARBEIRO.permissao);
