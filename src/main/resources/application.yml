@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/barbearia}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASS:postgres}
+  mail:
+    host: ${MAIL_HOST:sandbox.smtp.mailtrap.io}
+    port: ${MAIL_PORT:2525}
+    username: ${MAIL_USER:cdf1dddced9b06}
+    password: ${MAIL_PASS:101262b0d62d8b}
+    properties:
+      mail:
+        transport:
+          protocol: smtp
+        debug: true
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+api:
+  security:
+    token:
+      secret: ${TOKEN_SECRET:123}
