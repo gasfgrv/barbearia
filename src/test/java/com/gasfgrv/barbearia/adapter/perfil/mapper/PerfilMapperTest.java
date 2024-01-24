@@ -15,7 +15,7 @@ class PerfilMapperTest {
 
     @Test
     void paraDominio() {
-        var perfil = perfilMapper.paraDominio(PerfilMock.getEntity());
+        var perfil = perfilMapper.paraDominio(PerfilMock.getBarbeiroEntity());
         Assertions
                 .assertThat(perfil)
                 .isExactlyInstanceOf(Perfil.class)
