@@ -12,7 +12,7 @@ import org.springframework.boot.test.system.CapturedOutput;
 import org.springframework.boot.test.system.OutputCaptureExtension;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-@Testcontainers
+
 @ExtendWith(OutputCaptureExtension.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class PerfilRepositoryAdapterTest extends TestcontainersConfig {
