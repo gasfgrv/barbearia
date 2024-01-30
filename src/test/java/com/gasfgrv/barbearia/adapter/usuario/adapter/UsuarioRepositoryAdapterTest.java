@@ -1,8 +1,7 @@
 package com.gasfgrv.barbearia.adapter.usuario.adapter;
 
 import com.gasfgrv.barbearia.adapter.usuario.database.JpaUsuarioRepository;
-import com.gasfgrv.barbearia.config.TestcontainersConfig;
-import com.gasfgrv.barbearia.domain.usuario.model.Usuario;
+import com.gasfgrv.barbearia.config.IntegrationTestsBaseConfig;
 import com.gasfgrv.barbearia.mocks.usuario.model.UsuarioMock;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer;
@@ -14,13 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.system.CapturedOutput;
 import org.springframework.boot.test.system.OutputCaptureExtension;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 
 @ExtendWith(OutputCaptureExtension.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class UsuarioRepositoryAdapterTest extends TestcontainersConfig {
+class UsuarioRepositoryAdapterTest extends IntegrationTestsBaseConfig {
     @Autowired
     private UsuarioRepositoryAdapter usuarioRepositoryAdapter;
 
