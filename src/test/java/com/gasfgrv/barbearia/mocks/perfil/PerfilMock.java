@@ -1,9 +1,10 @@
-package com.gasfgrv.barbearia.mocks.perfil.model;
+package com.gasfgrv.barbearia.mocks.perfil;
 
 import com.gasfgrv.barbearia.adapter.perfil.database.PerfilEntity;
 import com.gasfgrv.barbearia.domain.perfil.model.Perfil;
 
 public class PerfilMock {
+
     private enum perfilEnum {
         CLIENTE(1, "CLIENTE"),
         BARBEIRO(2, "BARBEIRO");
@@ -44,4 +45,5 @@ public class PerfilMock {
         entity.setNome(perfilEnum.BARBEIRO.permissao);
         return entity;
     }
+
 }

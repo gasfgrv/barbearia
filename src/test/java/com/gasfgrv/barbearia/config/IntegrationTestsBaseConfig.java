@@ -16,8 +16,10 @@ import org.testcontainers.utility.DockerImageName;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public abstract class IntegrationTestsBaseConfig {
+
     @Container
-    static final PostgreSQLContainer<?> POSTGRE_SQL_CONTAINER = new PostgreSQLContainer<>(DockerImageName.parse("postgres:latest"));
+    static final PostgreSQLContainer<?> POSTGRE_SQL_CONTAINER =
+            new PostgreSQLContainer<>(DockerImageName.parse("postgres:latest"));
 
     @RegisterExtension
     protected static GreenMailExtension greenMail = new GreenMailExtension(ServerSetupTest.SMTP)
@@ -44,4 +46,5 @@ public abstract class IntegrationTestsBaseConfig {
         registry.add("spring.mail.host", () -> "127.0.0.1");
         registry.add("spring.mail.port", () -> 3025);
     }
+
 }

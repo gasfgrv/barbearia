@@ -2,8 +2,7 @@ package com.gasfgrv.barbearia.adapter.perfil.adapter;
 
 import com.gasfgrv.barbearia.config.IntegrationTestsBaseConfig;
 import com.gasfgrv.barbearia.domain.perfil.model.Perfil;
-import com.gasfgrv.barbearia.mocks.perfil.model.PerfilMock;
-import org.assertj.core.api.Assertions;
+import com.gasfgrv.barbearia.mocks.perfil.PerfilMock;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,48 +10,45 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.system.CapturedOutput;
 import org.springframework.boot.test.system.OutputCaptureExtension;
 
+import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(OutputCaptureExtension.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class PerfilRepositoryAdapterTest extends IntegrationTestsBaseConfig {
+
     @Autowired
     private PerfilRepositoryAdapter repository;
 
     @Test
     void buscarPorNomeCliente(CapturedOutput output) {
         Perfil perfil = repository.buscarPorNome("cliente".toUpperCase());
-        Assertions
-                .assertThat(perfil)
+
+        assertThat(perfil)
                 .usingDefaultComparator()
                 .isEqualTo(PerfilMock.getCliente());
-
-        Assertions
-                .assertThat(output)
+        assertThat(output)
                 .contains("Buscando dados do perfil");
     }
 
     @Test
     void buscarPorNomeBarbeiro(CapturedOutput output) {
         Perfil perfil = repository.buscarPorNome("barbeiro".toUpperCase());
-        Assertions
-                .assertThat(perfil)
+
+        assertThat(perfil)
                 .usingDefaultComparator()
                 .isEqualTo(PerfilMock.getBarbeiro());
-
-        Assertions
-                .assertThat(output)
+        assertThat(output)
                 .contains("Buscando dados do perfil");
     }
 
     @Test
     void buscarPorNomeNulo(CapturedOutput output) {
         Perfil perfil = repository.buscarPorNome("admin".toUpperCase());
-        Assertions
-                .assertThat(perfil)
-                .isNull();
 
-        Assertions
-                .assertThat(output)
+        assertThat(perfil)
+                .isNull();
+        assertThat(output)
                 .contains("Buscando dados do perfil");
     }
+
 }

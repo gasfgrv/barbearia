@@ -18,7 +18,8 @@ public class UsuarioService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) {
-        return Optional.ofNullable(repository.buscarPorEmail(username)).map(mapper::paraEntidade)
+        return Optional.ofNullable(repository.buscarPorEmail(username))
+                .map(mapper::paraEntidade)
                 .orElseThrow(UsuarioNaoEncontradoException::new);
     }
 }
