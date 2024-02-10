@@ -36,7 +36,6 @@ class ObterPerfilUseCaseTest {
 
         assertThat(perfil.getId()).isEqualTo(1);
         assertThat(perfil.getNome()).isEqualToIgnoringCase("Cliente");
-        assertThat(perfil.getNome()).isEqualToIgnoringCase("Cliente");
         verify(repository, times(1)).buscarPorNome(anyString());
     }
 
