@@ -13,14 +13,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.system.CapturedOutput;
 import org.springframework.boot.test.system.OutputCaptureExtension;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.test.web.servlet.MockMvc;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -50,11 +48,13 @@ class AutenticacaoUsuarioControllerTest extends IntegrationTestsBaseConfig {
 
     @Test
     void tratarRequisicaoDeLoginComSucesso(CapturedOutput output) throws JsonProcessingException {
+        var barbeiro = UsuarioMock.getBarbeiro();
+
         RestAssured
                 .given().log().everything()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .accept(MediaType.APPLICATION_JSON_VALUE)
-                .body(dadosAutenticacaoJson())
+                .body(dadosAutenticacaoJson(barbeiro.getLogin(), barbeiro.getSenha()))
                 .when().log().everything()
                 .post()
                 .then().log().everything()
@@ -64,12 +64,40 @@ class AutenticacaoUsuarioControllerTest extends IntegrationTestsBaseConfig {
         assertThat(output).contains("[POST] /v1/login - Requisição recebida");
     }
 
-    private String dadosAutenticacaoJson() throws JsonProcessingException {
-        var barbeiro = UsuarioMock.getBarbeiro();
+    @Test
+    void tratarRequisicaoDeLoginComCredenciaisInvalidas() throws JsonProcessingException {
+        var cliente = UsuarioMock.getCliente();
 
+        RestAssured
+                .given().log().everything()
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .accept(MediaType.APPLICATION_JSON_VALUE)
+                .body(dadosAutenticacaoJson(cliente.getLogin(), cliente.getSenha()))
+                .when().log().everything()
+                .post()
+                .then().log().everything()
+                .assertThat()
+                .statusCode(HttpStatus.UNAUTHORIZED.value());
+    }
+
+    @Test
+    void tratarRequisicaoDeLoginComSemPassarCredenciais() throws JsonProcessingException {
+        RestAssured
+                .given().log().everything()
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .accept(MediaType.APPLICATION_JSON_VALUE)
+                .body(dadosAutenticacaoJson("login", null))
+                .when().log().everything()
+                .post()
+                .then().log().everything()
+                .assertThat()
+                .statusCode(HttpStatus.BAD_REQUEST.value());
+    }
+
+    private String dadosAutenticacaoJson(String login, String senha) throws JsonProcessingException {
         var dadosAutenticacao = new DadosAutenticacao();
-        dadosAutenticacao.setEmail(barbeiro.getLogin());
-        dadosAutenticacao.setSenha(barbeiro.getSenha());
+        dadosAutenticacao.setEmail(login);
+        dadosAutenticacao.setSenha(senha);
 
         var objectMapper = new ObjectMapper();
         return objectMapper.writeValueAsString(dadosAutenticacao);
