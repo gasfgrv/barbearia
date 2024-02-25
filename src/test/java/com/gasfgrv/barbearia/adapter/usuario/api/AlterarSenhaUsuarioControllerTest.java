@@ -6,7 +6,7 @@ import com.gasfgrv.barbearia.adapter.usuario.api.model.AlterarSenhaEmailForm;
 import com.gasfgrv.barbearia.adapter.usuario.api.model.AlterarSenhaForm;
 import com.gasfgrv.barbearia.adapter.usuario.database.JpaUsuarioRepository;
 import com.gasfgrv.barbearia.adapter.usuario.database.UsuarioEntity;
-import com.gasfgrv.barbearia.config.IntegrationTestsBaseConfig;
+import com.gasfgrv.barbearia.config.PostgresContainerTestConfiguration;
 import com.gasfgrv.barbearia.mocks.usuario.UsuarioMock;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,9 +14,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.system.CapturedOutput;
 import org.springframework.boot.test.system.OutputCaptureExtension;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,8 +26,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(OutputCaptureExtension.class)
+@Import(PostgresContainerTestConfiguration.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class AlterarSenhaUsuarioControllerTest extends IntegrationTestsBaseConfig {
+class AlterarSenhaUsuarioControllerTest {
 
     public static final UsuarioEntity BARBEIRO = UsuarioMock.getBarbeiroEntity();
 
@@ -73,7 +77,7 @@ class AlterarSenhaUsuarioControllerTest extends IntegrationTestsBaseConfig {
         var cliente = UsuarioMock.getCliente();
 
         var form = new AlterarSenhaEmailForm();
-        form.setEmail(cliente.getLogin());
+        form.setEmail(cliente.getLogin().replaceAll("@","__"));
 
         RestAssured
                 .given().log().everything()
@@ -121,7 +125,7 @@ class AlterarSenhaUsuarioControllerTest extends IntegrationTestsBaseConfig {
         var cliente = UsuarioMock.getCliente();
 
         var form = new AlterarSenhaForm();
-        form.setEmailLogin(cliente.getLogin());
+        form.setEmailLogin(cliente.getLogin().replaceAll("@","__"));
         form.setNovaSenha("novaSenha");
 
         var senhaAntiga = obterSenha(form.getEmailLogin());
@@ -140,6 +144,7 @@ class AlterarSenhaUsuarioControllerTest extends IntegrationTestsBaseConfig {
         var senha = obterSenha(form.getEmailLogin());
 
         assertThat(output).contains("[PUT] /v1/login/senhas - Requisição recebida");
+        assertThat(output).contains("Envio do email cancelado");
         assertThat(senha).isEqualTo(senhaAntiga);
     }
 

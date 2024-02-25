@@ -1,7 +1,7 @@
 package com.gasfgrv.barbearia.adapter.usuario.adapter;
 
 import com.gasfgrv.barbearia.adapter.usuario.database.JpaUsuarioRepository;
-import com.gasfgrv.barbearia.config.IntegrationTestsBaseConfig;
+import com.gasfgrv.barbearia.config.PostgresContainerTestConfiguration;
 import com.gasfgrv.barbearia.domain.usuario.model.Usuario;
 import com.gasfgrv.barbearia.mocks.usuario.UsuarioMock;
 import org.junit.jupiter.api.MethodOrderer;
@@ -11,15 +11,19 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.system.CapturedOutput;
 import org.springframework.boot.test.system.OutputCaptureExtension;
+import org.springframework.context.annotation.Import;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(OutputCaptureExtension.class)
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Import(PostgresContainerTestConfiguration.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class UsuarioRepositoryAdapterTest extends IntegrationTestsBaseConfig {
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+class UsuarioRepositoryAdapterTest {
 
     public static final Usuario CLIENTE = UsuarioMock.getCliente();
     public static final Usuario BARBEIRO = UsuarioMock.getBarbeiro();

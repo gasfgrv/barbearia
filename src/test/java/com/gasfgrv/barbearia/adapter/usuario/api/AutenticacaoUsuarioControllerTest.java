@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gasfgrv.barbearia.adapter.usuario.api.model.DadosAutenticacao;
 import com.gasfgrv.barbearia.adapter.usuario.database.JpaUsuarioRepository;
 import com.gasfgrv.barbearia.adapter.usuario.database.UsuarioEntity;
-import com.gasfgrv.barbearia.config.IntegrationTestsBaseConfig;
+import com.gasfgrv.barbearia.config.PostgresContainerTestConfiguration;
 import com.gasfgrv.barbearia.mocks.usuario.UsuarioMock;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,9 +13,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.system.CapturedOutput;
 import org.springframework.boot.test.system.OutputCaptureExtension;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,8 +25,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(OutputCaptureExtension.class)
+@Import(PostgresContainerTestConfiguration.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class AutenticacaoUsuarioControllerTest extends IntegrationTestsBaseConfig {
+class AutenticacaoUsuarioControllerTest {
 
     public static final UsuarioEntity BARBEIRO = UsuarioMock.getBarbeiroEntity();
 

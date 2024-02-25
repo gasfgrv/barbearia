@@ -1,24 +1,31 @@
 package com.gasfgrv.barbearia.adapter.usuario.service;
 
 import com.gasfgrv.barbearia.adapter.usuario.database.JpaUsuarioRepository;
-import com.gasfgrv.barbearia.config.IntegrationTestsBaseConfig;
 import com.gasfgrv.barbearia.mocks.usuario.UsuarioMock;
+import com.icegreen.greenmail.configuration.GreenMailConfiguration;
+import com.icegreen.greenmail.junit5.GreenMailExtension;
 import com.icegreen.greenmail.util.GreenMailUtil;
+import com.icegreen.greenmail.util.ServerSetupTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 
 import javax.mail.MessagingException;
 import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class EmailNotificationServiceTest extends IntegrationTestsBaseConfig {
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+class EmailNotificationServiceTest {
 
     @Autowired
     private TestRestTemplate testRestTemplate;
@@ -28,6 +35,17 @@ class EmailNotificationServiceTest extends IntegrationTestsBaseConfig {
 
     @Autowired
     private ThreadPoolTaskExecutor executor;
+
+    @RegisterExtension
+    protected static GreenMailExtension greenMail = new GreenMailExtension(ServerSetupTest.SMTP)
+            .withConfiguration(GreenMailConfiguration.aConfig().withDisabledAuthentication())
+            .withPerMethodLifecycle(true);
+
+    @DynamicPropertySource
+    static void postgresProperties(DynamicPropertyRegistry registry) {
+        registry.add("spring.mail.host", () -> "127.0.0.1");
+        registry.add("spring.mail.port", () -> 3025);
+    }
 
     @BeforeEach
     void setUp() {
