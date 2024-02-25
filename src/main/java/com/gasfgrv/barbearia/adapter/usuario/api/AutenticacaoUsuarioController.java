@@ -30,10 +30,9 @@ public class AutenticacaoUsuarioController {
 
     @PostMapping
     ResponseEntity<TokenJwtResponse> tratarRequisicao(@RequestBody @Valid DadosAutenticacao dadosAutenticacao,
-                                           HttpServletRequest httpServletRequest) {
+                                                      HttpServletRequest httpServletRequest) {
         log.info("[{}] {} - Requisição recebida", httpServletRequest.getMethod(), httpServletRequest.getRequestURI());
-        var authenticationToken = new UsernamePasswordAuthenticationToken(dadosAutenticacao.getEmail(),
-                dadosAutenticacao.getSenha());
+        var authenticationToken = new UsernamePasswordAuthenticationToken(dadosAutenticacao.getEmail(), dadosAutenticacao.getSenha());
         var authentication = authenticationManager.authenticate(authenticationToken);
         var principal = (UserDetails) authentication.getPrincipal();
         var token = autenticarUsuario.autenticar(mapper.paraDominio(principal));
