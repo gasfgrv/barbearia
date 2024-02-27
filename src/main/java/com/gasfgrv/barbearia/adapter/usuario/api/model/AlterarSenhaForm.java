@@ -15,9 +15,9 @@ import lombok.ToString;
 @ToString
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class AlterarSenhaForm {
-    @Email
+    @Email(message = "Informar um e-mail válido")
     private String emailLogin;
 
-    @NotBlank
+    @NotBlank(message = "Informar uma nova senha")
     private String novaSenha;
 }
