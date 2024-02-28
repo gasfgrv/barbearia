@@ -7,6 +7,7 @@ import com.gasfgrv.barbearia.domain.usuario.exception.UsuarioNaoEncontradoExcept
 import com.gasfgrv.barbearia.usecase.usuario.AlterarSenhaUseCase;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,7 @@ public class AlterarSenhaUsuarioController {
     private final PasswordEncoder passwordEncoder;
 
     @PostMapping
-    public ResponseEntity<Void> tratarRequisicao(@RequestBody AlterarSenhaEmailForm form,
+    public ResponseEntity<Void> tratarRequisicao(@RequestBody @Valid AlterarSenhaEmailForm form,
                                                  HttpServletRequest httpServletRequest) {
         log.info("[{}] {} - Requisição recebida", httpServletRequest.getMethod(), httpServletRequest.getRequestURI());
 
@@ -45,7 +46,7 @@ public class AlterarSenhaUsuarioController {
 
     @Transactional
     @PutMapping
-    public ResponseEntity<Void> tratarRequisicao(@RequestBody AlterarSenhaForm form,
+    public ResponseEntity<Void> tratarRequisicao(@RequestBody @Valid AlterarSenhaForm form,
                                                  HttpServletRequest httpServletRequest) {
         log.info("[{}] {} - Requisição recebida", httpServletRequest.getMethod(), httpServletRequest.getRequestURI());
         try {
