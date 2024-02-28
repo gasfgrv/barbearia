@@ -1,0 +1,394 @@
+_type: export
+__export_format: 4
+__export_date: 2024-02-28T01:18:39.170Z
+__export_source: insomnia.desktop.app:v8.6.1
+resources:
+  - _id: req_b4fa9e699a0847f1acf3d0d853afae74
+    parentId: fld_259b5f6c10484ceda6d18a58df25bd62
+    modified: 1709081135793
+    created: 1709081001573
+    url: localhost:8080/v1/servicos/6d454e22-ad8d-4bcc-9e06-d47ec70a795d
+    name: Atualizar serviço
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"nome": "Corte - editado",
+        	"preco": 99.0,
+        	"descricao": "Teste de atualização",
+        	"duracao": 45
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.6.1
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_d0dd5b9838f646e7bb66cfaa4586d5e7',
+        'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'always', 60 %}"
+    metaSortKey: -1709081001573
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_259b5f6c10484ceda6d18a58df25bd62
+    parentId: wrk_67e46aef35344b679cf9e1e8c9adb197
+    modified: 1709071619076
+    created: 1709071610876
+    name: Serviços
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1709071610876
+    _type: request_group
+  - _id: wrk_67e46aef35344b679cf9e1e8c9adb197
+    parentId: null
+    modified: 1707956417341
+    created: 1707956417341
+    name: Requests
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_7538f75823bd437aabe542f6a1abb3c6
+    parentId: fld_259b5f6c10484ceda6d18a58df25bd62
+    modified: 1709082625540
+    created: 1709082612543
+    url: localhost:8080/v1/servicos/6d454e22-ad8d-4bcc-9e06-d47ec70a795d
+    name: Ativar serviço
+    description: ""
+    method: PATCH
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.6.1
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_d0dd5b9838f646e7bb66cfaa4586d5e7',
+        'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'always', 60 %}"
+    metaSortKey: -1709077792398
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_857e942934eb4401aaab031c6b93bd10
+    parentId: fld_259b5f6c10484ceda6d18a58df25bd62
+    modified: 1709074631316
+    created: 1709074583223
+    url: localhost:8080/v1/servicos
+    name: Listar serviços
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.6.1
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_d0dd5b9838f646e7bb66cfaa4586d5e7',
+        'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'always', 60 %}"
+    metaSortKey: -1709074583223
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_1881752de2b849569dab80b938c4e613
+    parentId: fld_259b5f6c10484ceda6d18a58df25bd62
+    modified: 1709077110612
+    created: 1709077095173
+    url: localhost:8080/v1/servicos/6d454e22-ad8d-4bcc-9e06-d47ec70a795d
+    name: Detalhar serviço
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.6.1
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_d0dd5b9838f646e7bb66cfaa4586d5e7',
+        'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'always', 60 %}"
+    metaSortKey: -1709073103163.5
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_ebef93cfc75f45f29d9f64eb600d90ed
+    parentId: fld_259b5f6c10484ceda6d18a58df25bd62
+    modified: 1709081371503
+    created: 1709081367610
+    url: localhost:8080/v1/servicos/6d454e22-ad8d-4bcc-9e06-d47ec70a795d
+    name: Desativar serviço
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.6.1
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_d0dd5b9838f646e7bb66cfaa4586d5e7',
+        'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'always', 60 %}"
+    metaSortKey: -1709072363133.75
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_bb6e886fda954b69a9fa6f4ecf24ba2a
+    parentId: fld_259b5f6c10484ceda6d18a58df25bd62
+    modified: 1709081035282
+    created: 1709071623104
+    url: localhost:8080/v1/servicos
+    name: Novo serviço
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"nome": "Corte",
+        	"preco": 50.0,
+        	"descricao": "Teste de cadastro",
+        	"duracao": 30
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.6.1
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_d0dd5b9838f646e7bb66cfaa4586d5e7',
+        'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'always', 60 %}"
+    metaSortKey: -1709071623104
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_39f15f743a0748ca9559f033cd2b27e6
+    parentId: fld_6a071bfc139c4215827c8c06525ee822
+    modified: 1708829006098
+    created: 1707956572497
+    url: localhost:8080/v1/login
+    name: login (Cliente)
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email": "cliente@teste.com",
+        	"senha": "client"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.6.1
+    authentication: {}
+    metaSortKey: -1707956572497
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_6a071bfc139c4215827c8c06525ee822
+    parentId: wrk_67e46aef35344b679cf9e1e8c9adb197
+    modified: 1709081039764
+    created: 1707956566886
+    name: Usuários
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1707956566886
+    _type: request_group
+  - _id: req_d0dd5b9838f646e7bb66cfaa4586d5e7
+    parentId: fld_6a071bfc139c4215827c8c06525ee822
+    modified: 1707958746584
+    created: 1707958722880
+    url: localhost:8080/v1/login
+    name: login (Barbeiro)
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email": "barbeiro@barbearia.com",
+        	"senha": "barbeiro"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.6.1
+    authentication: {}
+    metaSortKey: -1707956510609
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_65a98c07e81540888dfced5a3db1553a
+    parentId: fld_cb97f04398724df3963dc85a038cd372
+    modified: 1709081047848
+    created: 1707959196847
+    url: localhost:8080/v1/login/senhas
+    name: Solicitar alteração
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email": "barbeiro@barbearia.com"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.6.1
+    authentication: {}
+    metaSortKey: -1707959196847
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_cb97f04398724df3963dc85a038cd372
+    parentId: wrk_67e46aef35344b679cf9e1e8c9adb197
+    modified: 1707958840780
+    created: 1707958829283
+    name: Senhas
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1707956507803.5
+    _type: request_group
+  - _id: req_62fc5ec047f941e68776773777f834a9
+    parentId: fld_cb97f04398724df3963dc85a038cd372
+    modified: 1707959420628
+    created: 1707959317736
+    url: localhost:8080/v1/login/senhas
+    name: Alterar senha
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email_login":"barbeiro@barbearia.com",
+        	"nova_senha":"barbeiro"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.6.1
+    authentication: {}
+    metaSortKey: -1707959196747
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_22e56c8896f849f0ad7cff74070fcb85
+    parentId: wrk_67e46aef35344b679cf9e1e8c9adb197
+    modified: 1707956498195
+    created: 1707956448721
+    url: localhost:8080/actuator
+    name: Actuator
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.6.1
+    authentication: {}
+    metaSortKey: -1707956448721
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_500d1fb4c8d11f0b507cfcf258a8bc29abed820b
+    parentId: wrk_67e46aef35344b679cf9e1e8c9adb197
+    modified: 1707956417349
+    created: 1707956417349
+    name: Base Environment
+    data: {}
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1707956417349
+    _type: environment
+  - _id: jar_500d1fb4c8d11f0b507cfcf258a8bc29abed820b
+    parentId: wrk_67e46aef35344b679cf9e1e8c9adb197
+    modified: 1707956417355
+    created: 1707956417355
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
