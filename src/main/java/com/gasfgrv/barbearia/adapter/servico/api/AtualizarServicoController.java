@@ -10,6 +10,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -29,6 +30,7 @@ public class AtualizarServicoController {
     private final AtualizarServicoUseCase atualizarServicoUseCase;
     private final ServicoMapper mapper;
 
+    @Transactional
     @PutMapping
     public ResponseEntity<ServicoResponse> tratarRequisicao(@PathVariable("id_servico") UUID idServico,
                                                             @RequestBody @Valid AtualizarServicoForm form,
@@ -40,6 +42,7 @@ public class AtualizarServicoController {
         return ResponseEntity.ok(response);
     }
 
+    @Transactional
     @PatchMapping
     public ResponseEntity<ServicoResponse> tratarRequisicao(@PathVariable("id_servico") UUID idServico,
                                                             HttpServletRequest httpServletRequest) {

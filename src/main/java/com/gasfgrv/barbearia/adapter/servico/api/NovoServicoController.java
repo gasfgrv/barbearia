@@ -1,7 +1,7 @@
 package com.gasfgrv.barbearia.adapter.servico.api;
 
-import com.gasfgrv.barbearia.adapter.servico.api.model.impl.NovoServicoForm;
 import com.gasfgrv.barbearia.adapter.servico.api.model.ServicoResponse;
+import com.gasfgrv.barbearia.adapter.servico.api.model.impl.NovoServicoForm;
 import com.gasfgrv.barbearia.adapter.servico.mapper.ServicoMapper;
 import com.gasfgrv.barbearia.usecase.servico.NovoServicoUseCase;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -10,6 +10,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,7 @@ public class NovoServicoController {
     private final NovoServicoUseCase novoServicoUseCase;
     private final ServicoMapper mapper;
 
+    @Transactional
     @PostMapping
     public ResponseEntity<ServicoResponse> tratarRequisicao(@RequestBody @Valid NovoServicoForm form,
                                                             HttpServletRequest httpServletRequest) {
