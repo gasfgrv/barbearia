@@ -6,6 +6,7 @@ import com.gasfgrv.barbearia.domain.servico.port.ServicoRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.math.RoundingMode;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -29,7 +30,7 @@ public class AtualizarServicoUseCase {
 
         if (servico.isAtivo()) {
             servico.setNome(formataTexto(novoServico.getNome()));
-            servico.setPreco(novoServico.getPreco());
+            servico.setPreco(novoServico.getPreco().setScale(2, RoundingMode.HALF_EVEN));
             servico.setDescricao(novoServico.getDescricao());
             servico.setDuracao(novoServico.getDuracao());
         }

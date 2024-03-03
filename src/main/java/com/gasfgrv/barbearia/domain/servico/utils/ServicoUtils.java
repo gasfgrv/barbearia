@@ -8,7 +8,12 @@ import java.util.Set;
 public class ServicoUtils {
 
     public static boolean existemServicosSemelhantes(List<Servico> servicos, String nome) {
+        if (servicos.isEmpty()) {
+            return false;
+        }
+
         var palavrasChave = Set.of(nome.split("\\s"));
+
         return servicos.stream()
                 .map(Servico::getNome)
                 .anyMatch(nomeServico -> nomeDoServicoContemPalavrasChave(palavrasChave, nomeServico));
