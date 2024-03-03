@@ -77,7 +77,7 @@ class AlterarSenhaUsuarioControllerTest {
         var cliente = UsuarioMock.getCliente();
 
         var form = new AlterarSenhaEmailForm();
-        form.setEmail(cliente.getLogin().replaceAll("@","__"));
+        form.setEmail(cliente.getLogin().toUpperCase());
 
         RestAssured
                 .given().log().everything()
@@ -125,7 +125,7 @@ class AlterarSenhaUsuarioControllerTest {
         var cliente = UsuarioMock.getCliente();
 
         var form = new AlterarSenhaForm();
-        form.setEmailLogin(cliente.getLogin().replaceAll("@","__"));
+        form.setEmailLogin(cliente.getLogin().toUpperCase());
         form.setNovaSenha("novaSenha");
 
         var senhaAntiga = obterSenha(form.getEmailLogin());
@@ -143,8 +143,8 @@ class AlterarSenhaUsuarioControllerTest {
 
         var senha = obterSenha(form.getEmailLogin());
 
-        assertThat(output).contains("[PUT] /v1/login/senhas - Requisição recebida");
-        assertThat(output).contains("Envio do email cancelado");
+        assertThat(output).contains("[PUT] /v1/login/senhas - Requisição recebida",
+                "Envio do email cancelado");
         assertThat(senha).isEqualTo(senhaAntiga);
     }
 
