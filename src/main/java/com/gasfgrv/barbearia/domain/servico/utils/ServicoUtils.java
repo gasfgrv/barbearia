@@ -1,10 +1,13 @@
 package com.gasfgrv.barbearia.domain.servico.utils;
 
 import com.gasfgrv.barbearia.domain.servico.model.Servico;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.Set;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ServicoUtils {
 
     public static boolean existemServicosSemelhantes(List<Servico> servicos, String nome) {
@@ -12,15 +15,13 @@ public class ServicoUtils {
             return false;
         }
 
-        var palavrasChave = Set.of(nome.split("\\s"));
-
         return servicos.stream()
                 .map(Servico::getNome)
-                .anyMatch(nomeServico -> nomeDoServicoContemPalavrasChave(palavrasChave, nomeServico));
+                .allMatch(nomeServico -> nomeDoServicoContemPalavrasChave(nomeServico, nome.split("\\s")));
     }
 
-    private static boolean nomeDoServicoContemPalavrasChave(Set<String> palavrasChave, String nomeServico) {
-        return palavrasChave.stream().allMatch(nomeServico::contains);
+    private static boolean nomeDoServicoContemPalavrasChave(String nomeServico, String... palavrasChave) {
+        return Set.of(palavrasChave).stream().allMatch(nomeServico::contains);
     }
 
     public static String formataTexto(String texto) {
